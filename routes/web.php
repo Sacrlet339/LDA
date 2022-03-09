@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'setup'])->name('step up');
-Route::post('/signin', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('sign in');
+// Route::post('/signin', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('sign in');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/RegisterSuperAdmin',[App\Http\Controllers\Auth\LoginController::class, 'RegisterSuperAdmin'])->name('Register super admin');
