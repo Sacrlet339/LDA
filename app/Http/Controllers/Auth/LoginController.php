@@ -65,6 +65,8 @@ class LoginController extends Controller
             dd('failed');
         }else{
             $user = new User();
+            $user->firstname = $req->post('firstname');
+            $user->lastname = $req->post('lastname');
             $user->username = $req->post('username');
             $user->email = $req->post('email');
             $user->type = 'Super';
@@ -78,5 +80,20 @@ class LoginController extends Controller
             return view('auth.login')->with('message','Set up Successful');
         }
     }
+    // protected function redirectTo()
+    // {
+    //     switch(Auth::user()->type){
+    //         case 'Super':
+    //             return '/path';
+    //             break;
+    //         case 'Admin':
+    //             break;
+    //         case 'User':
+    //             break;
+    //         default:
+    //             break;
+    //     }
+
+    // }
 
 }

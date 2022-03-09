@@ -32,10 +32,13 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-4  d-flex flex-column">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
+                                <a class="btn btn-link" href="{{ route('login') }}">
+                                        {{ __('Back to login') }}
+                                    </a>
                             </div>
                         </div>
                     </form>
