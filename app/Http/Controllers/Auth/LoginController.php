@@ -80,8 +80,8 @@ class LoginController extends Controller
             $user->company_id = '0';
             $user->password = Hash::make($req->post('password'));
             $user->save();
-            // $data = company::newFactory();
-            // dd($data);
+
+            //seed database
             \Artisan::call('db:seed');
 
             return view('auth.login')->with('message','Set up Successful');

@@ -21,3 +21,6 @@ Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'setup'])->na
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/RegisterSuperAdmin',[App\Http\Controllers\Auth\LoginController::class, 'RegisterSuperAdmin'])->name('Register super admin');
+Route::get('/companies', [App\Http\Controllers\CompanyController::class, 'index'])->name('view companies');
+Route::post('/postCompany', [App\Http\Controllers\CompanyController::class, 'store'])->name('post company');
+

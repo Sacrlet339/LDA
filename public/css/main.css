@@ -6,3 +6,17 @@
     width: 280px;
     height:100%;
 }
+.mainContent{
+    border: 1px solid red;
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    height: calc(100% - 3rem);
+    position: fixed;
+}
+.fixed-card{
+    position: fixed;
+    width: 80%;
+    height: 79%;
+    overflow-y: auto;
+}
+

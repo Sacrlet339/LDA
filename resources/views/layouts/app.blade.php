@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -96,22 +97,22 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
+                    <a href="{{ route('home') }}" class="nav-link {{ (request()->is('home*')) ? 'active' : 'text-white' }}" aria-current="page">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                     Home
                     </a>
                 </li>
                 @if(Auth::user()->type == 'Super')
                 <li>
-                    <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    <a href="{{ route('view companies') }}" class="nav-link {{ (request()->is('companies*')) ? 'active' : 'text-white' }}">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#companies"></use></svg>
                     Companies
                     </a>
                 </li>
                 @endif
                 <li>
-                    <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                    <a href="#" class="nav-link  {{ (request()->is('users*')) ? 'active' : 'text-white' }}">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#user"></use></svg>
                     Users
                     </a>
                 </li>
@@ -119,7 +120,7 @@
                 </div>
             </main>
         @endauth
-        <main class="py-0 d-flex" style="height:100%">
+        <main class="py-0 d-flex position-absolute" style="height:100%">
             @yield('content')
         </main>
     </div>
