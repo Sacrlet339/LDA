@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
 Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'setup'])->name('step up');
 // Route::post('/signin', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('sign in');
 Auth::routes();

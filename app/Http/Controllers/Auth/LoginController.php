@@ -49,7 +49,7 @@ class LoginController extends Controller
         if($firstUser == null){
             return view('setup');
         }else{
-            return view('auth.register');
+            return view('welcome');
         }
 
 
@@ -58,11 +58,18 @@ class LoginController extends Controller
         $validated = $req->validate([
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
-            'password' => 'required|max:16',
+            'password' => 'required|min:7|max:16',
         ]);
 
-        if(!$validated){
-            dd('failed');
+        if ($validated->fails()) {
+
+            return redirect()->back()
+
+            ->withErrors($validator)
+
+            ->withInput();
+
+
         }else{
             $user = new User();
             $user->firstname = $req->post('firstname');

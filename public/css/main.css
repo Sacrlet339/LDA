@@ -1,0 +1,8 @@
+#main{
+    position:fixed;
+    height:100vh;
+}
+#SidebarContainer{
+    width: 280px;
+    height:100%;
+}
