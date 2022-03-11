@@ -25,4 +25,5 @@ Route::get('/companies', [App\Http\Controllers\CompanyController::class, 'index'
 Route::post('/postCompany', [App\Http\Controllers\CompanyController::class, 'store'])->name('post company');
 Route::get('/viewCompany', [App\Http\Controllers\CompanyController::class, 'edit'])->name('view company');
 Route::post('/updateCompany', [App\Http\Controllers\CompanyController::class, 'update'])->name('update company');
+Route::get('/deleteCompany', [App\Http\Controllers\CompanyController::class, 'delete'])->name('delete company');
 

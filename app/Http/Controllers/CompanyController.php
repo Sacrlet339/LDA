@@ -35,7 +35,24 @@ class CompanyController extends Controller
         return redirect()->back()->with('success','Action Successful');
     }
     public function update(Request $req){
-        dd($req->all());
+        // dd($req->all());
+        $validated = Validator::make($req->all(), [
+            'name' => 'required',
+            'email' => 'required|max:100',
+            'tel' => 'min:10|max:12',
+        ]);
+        if ($validated->fails()) {
+            return redirect()->back()
+            ->withErrors($validated)
+            ->withInput();
+        }
+        $company = company::find($req->post('id'));
+        $company->name = $req->post('name');
+        $company->email = $req->post('email');
+        $company->tel = $req->post('tel');
+        $company->save();
+
+        return redirect()->back()->with('success','Action Successful');
     }
     public function delete(Request $req){
         dd($req->all());

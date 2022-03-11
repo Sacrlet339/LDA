@@ -1,17 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mainContent">
-    @if(session()->has('success'))
-        <div class="alert alert-success">
-            {{ session()->get('success') }}
+@if($errors->any())
+    <div class="AlertContainer" id="errorAlert">
+        <div class="card errorAlert">
+            <div class="card-header text-end">
+               <button type="button" class="btn-close" onclick="closeModel('errorAlert')"></button>
+            </div>
+            <div class="card-body text-danger text-center">
+                <i class=" fs-1 fa-solid fa-circle-exclamation"></i>
+                <p class="fs-4 text-danger"> Failed To Create Company. </p>
+            </div>
         </div>
-    @endif
-
-            @foreach ($errors->all() as $error)
-
-            @endforeach
-
+    </div>
+@endif
+@if(session()->has('success'))
+    <div class="AlertContainer" id="successAlert">
+        <div class="card errorAlert">
+            <div class="card-header text-end">
+               <button type="button" class="btn-close" onclick="closeModel('successAlert')"></button>
+            </div>
+            <div class="card-body text-success text-center">
+                <i class=" fs-1 fa-solid fa-circle-check"></i>
+                <p class="fs-4 text-success">{{ session()->get('success') }}</p>
+            </div>
+        </div>
+    </div>
+@endif
+<div class="mainContent">
     <div class="container-fluid">
         <div class="container-fluid px-4 py-4 d-flex justify-content-end">
         <button class="btn btn-primary" onclick="displayCreateCompany()" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-regular fa-plus"></i> Create company</button>
@@ -116,12 +132,14 @@
             </div>
         </div>
         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"  onclick="closeModel('editModal')">Delete</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="closeModel('editModal')">Close</button>
             <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
         </form>
     </div>
 </div>
+
 @endsection
 
 <script>
