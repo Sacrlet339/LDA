@@ -112,7 +112,7 @@
                 </li>
                 @endif
                 <li>
-                    <a href="#" class="nav-link  {{ (request()->is('users*')) ? 'active' : 'text-white' }}">
+                    <a href="{{ route('view users') }}" class="nav-link  {{ (request()->is('users*')) ? 'active' : 'text-white' }}">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#user"></use></svg>
                     Users
                     </a>
@@ -121,7 +121,7 @@
                 </div>
             </main>
         @endauth
-        <main class="py-0 d-flex position-absolute full-width full-height">
+        <main class="py-0 d-flex position-absolute full-width" style="top:4rem;height:calc(100% - 4rem);">
             @yield('content')
         </main>
     </div>

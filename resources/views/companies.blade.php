@@ -94,7 +94,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </form>
   </div>
@@ -108,7 +108,7 @@
             <button type="button" class="btn-close" onclick="closeModel('editModal')"></button>
         </div>
         <div class="modal-body row">
-            <input name="id" id="id" hidden readonly>
+        <input name="id" id="id" hidden readonly>
             <div class="col-md-6 mb-3 d-flex flex-column">
                 <label>Name</label>
                 <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"  value="{{ old('name') }}" required autofocus>
@@ -134,7 +134,7 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"  onclick="closeModel('editModal')">Delete</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="closeModel('editModal')">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
         </form>
     </div>
