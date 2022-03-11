@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -77,5 +78,28 @@ class UserController extends Controller
     }
     public function delete(Request $req){
         dd($req->all());
+    }
+    public function updateProfile(Request $req){
+        // dd($req->all());
+        $validated = Validator::make($req->all(), [
+            'firstname' => 'required|max:100',
+            'lastname' => 'required|max:100',
+            'username' => 'required|unique:users',
+            'email' => 'required|max:100',
+            'password' => 'required|min:8',
+        ]);
+        if ($validated->fails()) {
+            return redirect()->back()
+            ->withErrors($validated)
+            ->withInput();
+        }
+        $user = User::find(Auth::user()->id);
+        $user->firstname = $req->post('firstname');
+        $user->lastname = $req->post('lastname');
+        $user->username = $req->post('username');
+        $user->email = $req->post('email');
+        $user->password = Hash::make($req->post('password'));
+        $user->save();
+        return redirect()->back()->with('success','Action Successful');
     }
 }

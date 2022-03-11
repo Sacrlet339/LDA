@@ -58,7 +58,7 @@ class LoginController extends Controller
         $validated = $req->validate([
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
-            'password' => 'required|min:7|max:16',
+            'password' => 'required|min:8|max:16',
         ]);
 
         if ($validated->fails()) {
@@ -87,20 +87,6 @@ class LoginController extends Controller
             return view('auth.login')->with('message','Set up Successful');
         }
     }
-    // protected function redirectTo()
-    // {
-    //     switch(Auth::user()->type){
-    //         case 'Super':
-    //             return '/path';
-    //             break;
-    //         case 'Admin':
-    //             break;
-    //         case 'User':
-    //             break;
-    //         default:
-    //             break;
-    //     }
 
-    // }
 
 }

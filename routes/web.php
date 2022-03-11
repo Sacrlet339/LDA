@@ -29,4 +29,5 @@ Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->nam
 Route::post('/postUser', [App\Http\Controllers\UserController::class, 'store'])->name('post user');
 Route::post('/updateUser', [App\Http\Controllers\UserController::class, 'update'])->name('update user');
 Route::get('/deleteUser', [App\Http\Controllers\UserController::class, 'delete'])->name('delete user');
-
+Route::get('/profile', function () { return view('profile'); })->name('profile');
+Route::post('/profile',  [App\Http\Controllers\UserController::class, 'updateProfile'])->name('update profile');

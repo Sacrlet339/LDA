@@ -9,7 +9,7 @@
             </div>
             <div class="card-body text-danger text-center">
                 <i class=" fs-1 fa-solid fa-circle-exclamation"></i>
-                <p class="fs-4 text-danger"> Failed To Create Company. </p>
+                <p class="fs-4 text-danger">  Failed To Complete Action. </p>
             </div>
         </div>
     </div>
