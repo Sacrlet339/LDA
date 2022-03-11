@@ -34,7 +34,10 @@ class CompanyController extends Controller
 
         return redirect()->back()->with('success','Action Successful');
     }
-    public function edit(){}
-    public function update(){}
-    public function delete(){}
+    public function update(Request $req){
+        dd($req->all());
+    }
+    public function delete(Request $req){
+        dd($req->all());
+    }
 }
