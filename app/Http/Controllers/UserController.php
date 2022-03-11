@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-        //get all companies that not been deleted and present them to view
+        //get all user and related compnay that not been deleted and present them to view
         switch(Auth::user()->type){
             case 'Super':
-                $users = User::join('companies','companies.id','users.company_id')->select('users.*','companies.name')->get();
+                $users = User::join('companies','companies.id','users.company_id')->where('users.id','!=',Auth::user()->id)->select('users.*','companies.name')->get();
                 break;
             case 'Admin':
-                $users = User::join('companies','companies.id','users.company_id')->where('users.company_id',Auth::user()->company_id)->select('users.*','companies.name')->get();
+                $users = User::join('companies','companies.id','users.company_id')->where('users.company_id',Auth::user()->company_id)->where('users.id','!=',Auth::user()->id)->select('users.*','companies.name')->get();
                 break;
             default:
                 dd('error');
@@ -53,7 +53,6 @@ class UserController extends Controller
         return redirect()->back()->with('success','Action Successful');
     }
     public function update(Request $req){
-        // dd($req->all());
         $validated = Validator::make($req->all(), [
             'firstname' => 'required|max:100',
             'lastname' => 'required|max:100',
@@ -77,10 +76,11 @@ class UserController extends Controller
         return redirect()->back()->with('success','Action Successful');
     }
     public function delete(Request $req){
-        dd($req->all());
+        $company = User::find($req->post('del_user_id'));
+        $company->delete();
+        return redirect()->back()->with('success','Action Successful');
     }
     public function updateProfile(Request $req){
-        // dd($req->all());
         $validated = Validator::make($req->all(), [
             'firstname' => 'required|max:100',
             'lastname' => 'required|max:100',

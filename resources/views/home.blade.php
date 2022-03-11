@@ -1,24 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="fluid-container">
-    <!-- <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }} {{ Auth::user()->username}}
-                    <br>
-                </div>
-            </div>
+<div class="mainContent">
+    <div class="container-fluid">
+        <div class="container-fluid px-4 py-4 d-flex justify-content-end">
         </div>
-    </div> -->
+         <div class="container-fluid fixed-card">
+         <h2>Welcome, {{Auth::user()->firstname}} {{Auth::user()->lastname}} </h2>
+        </div>
+    </div>
 </div>
 @endsection
+

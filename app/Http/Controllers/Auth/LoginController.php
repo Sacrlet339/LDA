@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Exceptions\Handler;
 use Illuminate\Support\Facades\Artisan;
+use Validator;
 class LoginController extends Controller
 {
     /*
@@ -55,7 +56,9 @@ class LoginController extends Controller
 
     }
     public function RegisterSuperAdmin(Request $req){
-        $validated = $req->validate([
+        $validated = Validator::make($req->all(),[
+            'firstname' => 'required|max:100',
+            'lastname' => 'required|max:100',
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:8|max:16',
@@ -65,7 +68,7 @@ class LoginController extends Controller
 
             return redirect()->back()
 
-            ->withErrors($validator)
+            ->withErrors($validated)
 
             ->withInput();
 
@@ -84,7 +87,7 @@ class LoginController extends Controller
             //seed database
             \Artisan::call('db:seed');
 
-            return view('auth.login')->with('message','Set up Successful');
+            return view('auth.login')->with('success','System Set up Successful');
         }
     }
 

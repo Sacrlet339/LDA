@@ -24,10 +24,10 @@ Route::post('/RegisterSuperAdmin',[App\Http\Controllers\Auth\LoginController::cl
 Route::get('/companies', [App\Http\Controllers\CompanyController::class, 'index'])->name('view companies');
 Route::post('/postCompany', [App\Http\Controllers\CompanyController::class, 'store'])->name('post company');
 Route::post('/updateCompany', [App\Http\Controllers\CompanyController::class, 'update'])->name('update company');
-Route::get('/deleteCompany', [App\Http\Controllers\CompanyController::class, 'delete'])->name('delete company');
+Route::post('/deleteCompany', [App\Http\Controllers\CompanyController::class, 'delete'])->name('delete company');
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('view users');
 Route::post('/postUser', [App\Http\Controllers\UserController::class, 'store'])->name('post user');
 Route::post('/updateUser', [App\Http\Controllers\UserController::class, 'update'])->name('update user');
-Route::get('/deleteUser', [App\Http\Controllers\UserController::class, 'delete'])->name('delete user');
+Route::post('/deleteUser', [App\Http\Controllers\UserController::class, 'delete'])->name('delete user');
 Route::get('/profile', function () { return view('profile'); })->name('profile');
 Route::post('/profile',  [App\Http\Controllers\UserController::class, 'updateProfile'])->name('update profile');

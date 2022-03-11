@@ -43,17 +43,17 @@
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
                             <th scope="col">Company</th>
-                            <th scope="col">Created</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user)<tr onclick="populateEditForm({{ $user->id }},'<?php echo str_replace('\'', ' ',$user->firstname); ?>','<?php echo str_replace('\'', ' ',$user->lastname); ?>','<?php echo str_replace('\'', ' ',$user->username); ?>','{{ $user->email }}')">
+                        @foreach($users as $user)<tr>
                                 <th scope="row clickable-row">{{ $user->id }}</th>
-                                <td>{{ $user->firstname }} {{ $user->lastname }}</td>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->created_at }}</td>
+                                <td onclick="populateEditForm({{ $user->id }},'<?php echo str_replace('\'', ' ',$user->firstname); ?>','<?php echo str_replace('\'', ' ',$user->lastname); ?>','<?php echo str_replace('\'', ' ',$user->username); ?>','{{ $user->email }}')">{{ $user->firstname }} {{ $user->lastname }}</td>
+                                <td onclick="populateEditForm({{ $user->id }},'<?php echo str_replace('\'', ' ',$user->firstname); ?>','<?php echo str_replace('\'', ' ',$user->lastname); ?>','<?php echo str_replace('\'', ' ',$user->username); ?>','{{ $user->email }}')">{{ $user->username }}</td>
+                                <td onclick="populateEditForm({{ $user->id }},'<?php echo str_replace('\'', ' ',$user->firstname); ?>','<?php echo str_replace('\'', ' ',$user->lastname); ?>','<?php echo str_replace('\'', ' ',$user->username); ?>','{{ $user->email }}')">{{ $user->email }}</td>
+                                <td onclick="populateEditForm({{ $user->id }},'<?php echo str_replace('\'', ' ',$user->firstname); ?>','<?php echo str_replace('\'', ' ',$user->lastname); ?>','<?php echo str_replace('\'', ' ',$user->username); ?>','{{ $user->email }}')">{{ $user->name }}</td>
+                                <td onclick="deleteUser({{ $user->id }})" class="text-danger"><i class="fa-solid fa-trash"></i></td>
                                 </tr>
                         @endforeach
                     </tbody>
@@ -187,7 +187,23 @@
         </form>
     </div>
 </div>
-
+<div class="AlertContainer" id="deleteAlert">
+        <div class="card errorAlert">
+            <div class="card-header text-end">
+               <button type="button" class="btn-close" onclick="closeModel('deleteAlert')"></button>
+            </div>
+            <form action="{{ route('delete user') }}" method="POST" class="card-body text-danger text-center">
+                <i class=" fs-1 fa-solid fa-circle-exclamation"></i>
+                <p class="fs-4 text-danger">Are you sure?</p>
+                <div class="modal-footer">
+                    @csrf
+                    <input id="del_user_id" name="del_user_id" readonly hidden>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="closeModel('deleteAlert')">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 <script>
@@ -205,5 +221,10 @@
     function closeModel(nodeId){
         console.log(nodeId);
         document.getElementById(nodeId).style.display = "none";
+    }
+    function deleteUser(user_id){
+        console.log(user_id);
+        document.getElementById('del_user_id').value = user_id;
+        document.getElementById('deleteAlert').style.display = "flex";
     }
 </script>

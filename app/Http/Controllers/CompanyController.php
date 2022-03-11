@@ -15,7 +15,6 @@ class CompanyController extends Controller
         return view('companies', compact('companies'));
     }
     public function store(Request $req){
-        // dd($req->all());
         $validated = Validator::make($req->all(), [
             'name' => 'required|unique:companies',
             'email' => 'required|max:100',
@@ -35,7 +34,6 @@ class CompanyController extends Controller
         return redirect()->back()->with('success','Action Successful');
     }
     public function update(Request $req){
-        // dd($req->all());
         $validated = Validator::make($req->all(), [
             'name' => 'required',
             'email' => 'required|max:100',
@@ -55,6 +53,8 @@ class CompanyController extends Controller
         return redirect()->back()->with('success','Action Successful');
     }
     public function delete(Request $req){
-        dd($req->all());
+        $company= company::find($req->post('del_compnay_id'));
+        $company->delete();
+        return redirect()->back()->with('success','Action Successful');
     }
 }

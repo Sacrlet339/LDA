@@ -42,16 +42,16 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Tel</th>
-                            <th scope="col">Created</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($companies as $company)<tr onclick="populateEditForm({{ $company->id }},'<?php echo str_replace('\'', ' ',$company->name); ?>','{{ $company->email }}','{{ $company->tel }}')">
-                                <th scope="row clickable-row">{{ $company->id }}</th>
-                                <td>{{ $company->name }}</td>
-                                <td>{{ $company->email }}</td>
-                                <td>{{ $company->tel }}</td>
-                                <td>{{ $company->created_at }}</td>
+                        @foreach($companies as $company)<tr>
+                                <th  onclick="populateEditForm({{ $company->id }},'<?php echo str_replace('\'', ' ',$company->name); ?>','{{ $company->email }}','{{ $company->tel }}')" scope="row clickable-row">{{ $company->id }}</th>
+                                <td onclick="populateEditForm({{ $company->id }},'<?php echo str_replace('\'', ' ',$company->name); ?>','{{ $company->email }}','{{ $company->tel }}')">{{ $company->name }}</td>
+                                <td onclick="populateEditForm({{ $company->id }},'<?php echo str_replace('\'', ' ',$company->name); ?>','{{ $company->email }}','{{ $company->tel }}')">{{ $company->email }}</td>
+                                <td onclick="populateEditForm({{ $company->id }},'<?php echo str_replace('\'', ' ',$company->name); ?>','{{ $company->email }}','{{ $company->tel }}')">{{ $company->tel }}</td>
+                                <td onclick="deleteCompany({{ $company->id }})" class="text-danger"><i class="fa-solid fa-trash"></i></td>
                                 </tr>
                         @endforeach
                     </tbody>
@@ -132,14 +132,29 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"  onclick="closeModel('editModal')">Delete</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="closeModel('editModal')">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
         </form>
     </div>
 </div>
-
+<div class="AlertContainer" id="deleteAlert">
+        <div class="card errorAlert">
+            <div class="card-header text-end">
+               <button type="button" class="btn-close" onclick="closeModel('deleteAlert')"></button>
+            </div>
+            <form action="{{ route('delete company') }}" method="POST" class="card-body text-danger text-center">
+                <i class=" fs-1 fa-solid fa-circle-exclamation"></i>
+                <p class="fs-4 text-danger">Are you sure?</p>
+                <div class="modal-footer">
+                    @csrf
+                    <input id="del_compnay_id" name="del_compnay_id" readonly hidden>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="closeModel('deleteAlert')">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 <script>
@@ -157,5 +172,10 @@
     function closeModel(nodeId){
         console.log(nodeId);
         document.getElementById(nodeId).style.display = "none";
+    }
+    function deleteCompany(company_id){
+        console.log(company_id);
+        document.getElementById('del_compnay_id').value = company_id;
+        document.getElementById('deleteAlert').style.display = "flex";
     }
 </script>

@@ -59,7 +59,10 @@
 }
 .errorAlert{
     width: 20%;
-    height: 20%;
+    height: fit-content;
     display: flex;
     justify-content: center;
+}
+#deleteAlert{
+    display:none;
 }
