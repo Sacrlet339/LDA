@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
+use App\Models\Log;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -50,6 +51,11 @@ class UserController extends Controller
         $user->company_id = $req->post('company_id');
         $user->save();
 
+        $log = new Log();
+        $log->model = 'User';
+        $log->action = 'Added new USer  ID:'.$user->id;
+        $log->completed_by = Auth::user()->id;
+        $log->save();
         return redirect()->back()->with('success','Action Successful');
     }
     public function update(Request $req){
@@ -73,11 +79,21 @@ class UserController extends Controller
         $user->company_id = $req->post('company_id');
         $user->save();
 
+        $log = new Log();
+        $log->model = 'User';
+        $log->action = 'Updated User  ID:'.$user->id;
+        $log->completed_by = Auth::user()->id;
+        $log->save();
         return redirect()->back()->with('success','Action Successful');
     }
     public function delete(Request $req){
-        $company = User::find($req->post('del_user_id'));
-        $company->delete();
+        $user = User::find($req->post('del_user_id'));
+        $user->delete();
+        $log = new Log();
+        $log->model = 'User';
+        $log->action = 'Deleted User  ID:'.$req->post('del_user_id');
+        $log->completed_by = Auth::user()->id;
+        $log->save();
         return redirect()->back()->with('success','Action Successful');
     }
     public function updateProfile(Request $req){
@@ -100,6 +116,11 @@ class UserController extends Controller
         $user->email = $req->post('email');
         $user->password = Hash::make($req->post('password'));
         $user->save();
+        $log = new Log();
+        $log->model = 'User';
+        $log->action = 'Updated User Profile ID:'.$user->id;
+        $log->completed_by = Auth::user()->id;
+        $log->save();
         return redirect()->back()->with('success','Action Successful');
     }
 }

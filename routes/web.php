@@ -31,3 +31,4 @@ Route::post('/updateUser', [App\Http\Controllers\UserController::class, 'update'
 Route::post('/deleteUser', [App\Http\Controllers\UserController::class, 'delete'])->name('delete user');
 Route::get('/profile', function () { return view('profile'); })->name('profile');
 Route::post('/profile',  [App\Http\Controllers\UserController::class, 'updateProfile'])->name('update profile');
+Route::get('/logs', [App\Http\Controllers\LogController::class, 'index'])->name('logs');

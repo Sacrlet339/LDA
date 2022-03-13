@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\company;
 use App\Models\User;
+use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
@@ -30,7 +31,11 @@ class CompanyController extends Controller
         $company->email = $req->post('email');
         $company->tel = $req->post('tel');
         $company->save();
-
+        $log = new Log();
+        $log->model = 'Company';
+        $log->action = 'Added new Compnay  ID:'.$company->id;
+        $log->completed_by = Auth::user()->id;
+        $log->save();
         return redirect()->back()->with('success','Action Successful');
     }
     public function update(Request $req){
@@ -50,11 +55,23 @@ class CompanyController extends Controller
         $company->tel = $req->post('tel');
         $company->save();
 
+        $log = new Log();
+        $log->model = 'Company';
+        $log->action = 'Updated Compnay  ID:'.$company->id;
+        $log->completed_by = Auth::user()->id;
+        $log->save();
+
         return redirect()->back()->with('success','Action Successful');
     }
     public function delete(Request $req){
         $company= company::find($req->post('del_compnay_id'));
         $company->delete();
+
+        $log = new Log();
+        $log->model = 'Company';
+        $log->action = 'Deleted Compnay  ID:'.$req->post('del_compnay_id');
+        $log->completed_by = Auth::user()->id;
+        $log->save();
         return redirect()->back()->with('success','Action Successful');
     }
 }

@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-black shadow-sm  position-absolute full-width">
             <div class="container">
             @guest
-                <a class="navbar-brand" href="{{ route('login') }}">
+                <a class="navbar-brand" href="{{ route('welcome') }}">
             @else
                 <a class="navbar-brand" href="{{ route('home') }}">
             @endguest
@@ -55,9 +55,9 @@
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                                </li> -->
                             @endif
                         @else
                         <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> -->
@@ -106,6 +106,12 @@
                     <a href="{{ route('view companies') }}" class="nav-link {{ (request()->is('companies*')) ? 'active' : 'text-white' }}">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#companies"></use></svg>
                     Companies
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('logs') }}" class="nav-link {{ (request()->is('logs*')) ? 'active' : 'text-white' }}">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#logs"></use></svg>
+                    Logs
                     </a>
                 </li>
                 @endif
