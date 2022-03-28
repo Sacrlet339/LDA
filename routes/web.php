@@ -32,3 +32,18 @@ Route::post('/deleteUser', [App\Http\Controllers\UserController::class, 'delete'
 Route::get('/profile', function () { return view('profile'); })->name('profile');
 Route::post('/profile',  [App\Http\Controllers\UserController::class, 'updateProfile'])->name('update profile');
 Route::get('/logs', [App\Http\Controllers\LogController::class, 'index'])->name('logs');
+
+
+Route::get('/redirect', function (Request $request) {
+    $request->session()->put('state', $state = Str::random(40));
+
+    $query = http_build_query([
+        'client_id' => 'client-id',
+        'redirect_uri' => 'http://third-party-app.com/callback',
+        'response_type' => 'code',
+        'scope' => '',
+        'state' => $state,
+    ]);
+
+    return redirect('http://passport-app.test/oauth/authorize?'.$query);
+});
